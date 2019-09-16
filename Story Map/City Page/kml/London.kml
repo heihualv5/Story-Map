@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<kml xmlns="http://www.opengis.net/kml/2.2">   
+  <Document> 
+  <name>London.kml</name>
+<Style id="icon">
+        <IconStyle>
+          <Icon>
+            <href>./icon/location.png</href>
+          </Icon>
+        </IconStyle>
+ </Style>
+   <Placemark>
+         <name>London Thames</name>
+         <description>Where we are</description>
+         <styleUrl>#icon</styleUrl>
+         <Point>
+           <coordinates>
+            0.111586111111111,51.51059444,0
+           </coordinates>
+         </Point>
+       </Placemark>
+
+   	<Placemark>
+         <name>London Piccadilly Circus</name>
+         <description>Where we are</description>
+         <styleUrl>#icon</styleUrl>
+         <Point>
+           <coordinates>
+            -0.135110,51.510040,0
+           </coordinates>
+         </Point>
+       </Placemark>
+ 
+  </Document> 
+</kml>

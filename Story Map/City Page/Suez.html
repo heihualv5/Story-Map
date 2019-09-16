@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        html, body{
+			margin:0; 
+			padding:0; 
+			height:100%; 
+			width: 100%;
+		}
+		#wrapper{
+			background:#ddd;
+			display:grid;
+		}
+		#mapdiv{
+			margin:0; 
+			padding:0;
+			grid-row: 1 / 3;
+		}
+    </style>
+	<!-- Change the name of the webpage into each city. -->
+    <title>Suez</title>  
+
+</head>
+
+<body bgcolor="#362619">
+
+<table id ="top" width=100% height="110px" align="center" cellpadding="0" cellspacing="0" style="background:#362619">
+  <tbody>
+  <tr height=5%>
+  </tr>
+  <tr height=40%>
+	<!-- Change the name of the headline of each city. -->
+	<!-- p.s. "&nbsp;" means space here. -->
+  	<td colspan="2" style="size:5px;color:#FFFFFF;font-family:lucida calligraphy;">&nbsp;&nbsp;Suez</td>
+  </tr>
+  <tr height=30%>
+	<!-- Change the name of the brief introduction of each city. -->
+	<td colspan="2" style="size:2px;color:#C5D5D5;font-family:lucida calligraphy;">&nbsp;&nbsp;&nbsp;This is the first stop of Phileas Fogg's tour.</td>
+  </tr>
+  <tr height=25%>
+    <!-- Link the corresponding webpage address after "href=" --> <!-- This part should be finished by Jiazhe at last. -->
+	<th width="77%"></th>
+	<th width="8%" style="text-align:center"><a id="link1" href=" ./London.html" style="size:2px;color:#C5D5D5;font-family:Calibri;"> LAST STOP </a></th>
+	<th width="8%" style="text-align:center"><a id="link2" href="./Bombay.html " style="size:2px;color:#C5D5D5;font-family:Calibri;"> NEXT STOP </a></th>
+	<th width="7%" style="text-align:center"><a id="link3" href="../Main%20page.html " style="size:2px;color:#C5D5D5;font-family:Calibri;">  RETURN  </a></th>
+  </tr>
+</table>
+
+<div id="wrapper">
+<div id="mapdiv" style="margin:0px; padding:0; background:#3E3D35; float:left; height:720px; width:100%; position:relative"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.11/lib/OpenLayers.js"></script>
+<script>
+        map = new OpenLayers.Map("mapdiv");
+        map.addLayer(new OpenLayers.Layer.OSM());
+
+        //Set start centre point and zoom
+		//For Suez, the first and final point is (32.446568, 30.593634), shift the center lonlat a little bit to show the kml point on the left.
+        var lonLat1 = new OpenLayers.LonLat(32.560457,30.619926)
+            .transform(
+                new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
+                map.getProjectionObject() // to Spherical Mercator Projection
+            );
+        var zoom1=12;
+        
+		map.setCenter(lonLat1, zoom1);
+		
+		var kmllayer = new OpenLayers.Layer.Vector("KML", {
+            strategies: [new OpenLayers.Strategy.Fixed()],
+            protocol: new OpenLayers.Protocol.HTTP({
+                url: "./kml/Egyptian Suez Canal.kml",
+                format: new OpenLayers.Format.KML({
+                    extractStyles: true, 
+                    extractAttributes: true,
+                    maxDepth: 2
+                })
+            })
+        });
+        
+		map.addLayer(kmllayer); 
+
+		var index = 1;
+	
+</script>
+
+<div align="center" id="photoShow" style="margin:0; padding:0; background:#3E3D35; float:left; height:450px; width:700px; position:absolute;top:135px;left:900px;"><!--Change the src of each scenic spot. -->
+	<img id="photo1" src="./Photo/Suez1.jpg" style="width:700px;">
+</div>
+
+
+<!-- Change the table height and to adjust the text window. -->
+<table id ="content1" width="700px" height="240px" align="center" cellpadding="0" cellspacing="0" style="background:#3E3D35; position:absolute; top:585px; left:900px;" >
+  <tbody>
+  <tr height="10px"></tr>
+  <tr>
+	<td width="10px"></td>
+	<!-- change the name of the name of each scenic spot. -->
+	<!-- p.s. "</br>" means starting from the next line. -->
+  	<td valign="top" width="170px" style="size:3px;color:#FFFFFF;font-family:Arial;">Egyptian Suez Canal</td>
+	<!-- change the introduction. -->
+	<td valign="top" style="size:2px;color:#FFFFFF;font-family:Arial;">The Suez Canal, opened in 1869, is a sea-level waterway in Egypt connecting the Mediterranean Sea to the Red Sea through the Isthmus of Suez. </br></br>
+	The canal offers watercraft a more direct route between the North Atlantic and northern Indian oceans via the Mediterranean and Red seas, thus avoiding the South Atlantic and southern Indian oceans.</br></br>
+	The Suez Canal, located at the junction of the three continents of Europe, Asia and Africa, is the longest ship lock-free canal in the world. It can be navigable day and night, and has a very high traffic and strategic position.</td>
+    <td width="10px"></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<kml xmlns="http://www.opengis.net/kml/2.2">   
+  <Document> 
+  <name>Bombay.kml</name>
+<Style id="icon">
+        <IconStyle>
+          <Icon>
+            <href>./icon/location.png</href>
+          </Icon>
+        </IconStyle>
+ </Style>
+   <Placemark>
+         <name>Mumbai Victoria Railway Station</name>
+         <description>Where we are</description>
+         <styleUrl>#icon</styleUrl>
+         <Point>
+           <coordinates>
+            72.83366,18.97545,0
+           </coordinates>
+         </Point>
+       </Placemark>
+
+   	<Placemark>
+         <name>Elephant Caves</name>
+         <description>Where we are</description>
+         <styleUrl>#icon</styleUrl>
+         <Point>
+           <coordinates>
+            72.931727,18.962629,0
+           </coordinates>
+         </Point>
+       </Placemark>
+ 
+  </Document> 
+</kml>

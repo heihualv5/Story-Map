@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<kml xmlns="http://www.opengis.net/kml/2.2">   
+  <Document> 
+  <name>London.kml</name>
+<Style id="icon">
+        <IconStyle>
+          <Icon>
+            <href>./icon/location.png</href>
+          </Icon>
+        </IconStyle>
+ </Style>
+   <Placemark>
+         <name>Yokohama Zengde Institute</name>
+         <description>Where we are</description>
+         <styleUrl>#icon</styleUrl>
+         <Point>
+           <coordinates>
+            139.629655,35.42819,0
+           </coordinates>
+         </Point>
+       </Placemark>
+
+   	<Placemark>
+         <name>Yokohama Park</name>
+         <description>Where we are</description>
+         <styleUrl>#icon</styleUrl>
+         <Point>
+           <coordinates>
+           139.640075,35.443407,0
+           </coordinates>
+         </Point>
+       </Placemark>
+ 
+  </Document> 
+</kml>

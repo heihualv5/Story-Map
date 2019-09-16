@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<kml xmlns="http://www.opengis.net/kml/2.2">   
+  <Document> 
+  <name>NewYork.kml</name>
+<Style id="icon">
+        <IconStyle>
+          <Icon>
+            <href>./icon/location.png</href>
+          </Icon>
+        </IconStyle>
+ </Style>
+   <Placemark>
+         <name>New York Suspension Bridge</name>
+         <description>Where we are</description>
+         <styleUrl>#icon</styleUrl>
+         <Point>
+           <coordinates>
+            -76.45538,42.45495,0
+           </coordinates>
+         </Point>
+       </Placemark>
+
+   	<Placemark>
+         <name>Washington Square</name>
+         <description>Where we are</description>
+         <styleUrl>#icon</styleUrl>
+         <Point>
+           <coordinates>
+            -73.997475,40.730779,0
+           </coordinates>
+         </Point>
+       </Placemark>
+ 
+  </Document> 
+</kml>

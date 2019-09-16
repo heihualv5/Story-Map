@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        html, body{
+			margin:0; 
+			padding:0; 
+			height:100%; 
+			width: 100%;
+		}
+		#wrapper{
+			background:#ddd;
+			display:grid;
+		}
+		#mapdiv{
+			margin:0; 
+			padding:0;
+			grid-row: 1 / 3;
+		}
+    </style>
+	<!-- Change the name of the webpage into each city. -->
+    <title>Bombay</title>
+	<script>
+	//<!-- If there is only two scenic spot, delete the first "else if" part and change the condition of the second "else if" into "index === 2". -->
+	function back(){
+		if(index === 1){
+            document.getElementById("content1")
+                    .style.display= "";
+            document.getElementById("photo1")
+                    .style.display= "";
+            document.getElementById("content2")
+                    .style.display= "none";
+            document.getElementById("photo2")
+                    .style.display= "none";
+			map.setCenter(lonLat1, zoom1);
+			index++;
+		}
+		else if(index === 2){
+            document.getElementById("content1")
+                    .style.display= "none";
+            document.getElementById("photo1")
+                    .style.display= "none";
+            document.getElementById("content2")
+                    .style.display= "";
+            document.getElementById("photo2")
+                    .style.display= "";
+			map.setCenter(lonLat2, zoom2);
+			index = 1;
+	}}
+	
+	<!-- If there is only two scenic spot, delete the first "else if" part and change the condition of the second "else if" into "index === 2". -->
+	function forward(){
+		if(index === 1){
+			document.getElementById("content1")
+					.style.display= "";
+			document.getElementById("photo1")
+					.style.display= "";
+			document.getElementById("content2")
+					.style.display= "none";
+			document.getElementById("photo2")
+					.style.display= "none";
+			map.setCenter(lonLat1, zoom1);
+			index = 2;
+		}
+		else if(index === 2){
+            document.getElementById("content1")
+                    .style.display= "none";
+            document.getElementById("photo1")
+                    .style.display= "none";
+            document.getElementById("content2")
+                    .style.display= "";
+            document.getElementById("photo2")
+                    .style.display= "";
+            map.setCenter(lonLat2, zoom2);
+			index--;
+		}
+	}
+	</script>
+</head>
+
+<body bgcolor="#362619">
+
+<table id ="top" width=100% height="110px" align="center" cellpadding="0" cellspacing="0" style="background:#362619">
+  <tbody>
+  <tr height=5%>
+  </tr>
+  <tr height=40%>
+	<!-- Change the name of the headline of each city. -->
+	<!-- p.s. "&nbsp;" means space here. -->
+  	<td colspan="2" style="size:5px;color:#FFFFFF;font-family:lucida calligraphy;">&nbsp;&nbsp;Bombay</td>
+  </tr>
+  <tr height=30%>
+	<!-- Change the name of the brief introduction of each city. -->
+	<td colspan="2" style="size:2px;color:#C5D5D5;font-family:lucida calligraphy;">&nbsp;&nbsp;&nbsp;This is the second stop of Phileas Fogg's tour.</td>
+  </tr>
+  <tr height=25%>
+    <!-- Link the corresponding webpage address after "href=" --> <!-- This part should be finished by Jiazhe at last. -->
+	<th width="77%"></th>
+	<th width="8%" style="text-align:center"><a id="link1" href="Suez.html" style="size:2px;color:#C5D5D5;font-family:Calibri;"> LAST STOP </a></th>
+	<th width="8%" style="text-align:center"><a id="link2" href="Calcutta.html" style="size:2px;color:#C5D5D5;font-family:Calibri;"> NEXT STOP </a></th>
+	<th width="7%" style="text-align:center"><a id="link3" href="../Main%20page.html  " style="size:2px;color:#C5D5D5;font-family:Calibri;">  RETURN  </a></th>
+  </tr>
+</table>
+
+<div id="wrapper">
+<div id="mapdiv" style="margin:0px; padding:0; background:#3E3D35; float:left; height:720px; width:100%; position:relative"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.11/lib/OpenLayers.js"></script>
+<script>
+        map = new OpenLayers.Map("mapdiv");
+        map.addLayer(new OpenLayers.Layer.OSM());
+
+        //Set start centre point and zoom
+		//For Suez, the first and final point is (32.446568, 30.593634), shift the center lonlat a little bit to show the kml point on the left.
+        var lonLat1 = new OpenLayers.LonLat(72.966000,18.962369)
+            .transform(
+                new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
+                map.getProjectionObject() // to Spherical Mercator Projection
+            );
+        var zoom1=14;
+        
+		//Set the second centre point and zoom
+		var lonLat2 = new OpenLayers.LonLat(72.859612,18.972272)
+				.transform(
+					new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
+					map.getProjectionObject() // to Spherical Mercator Projection
+				);
+		var zoom2=15;
+		
+
+		map.setCenter(lonLat1, zoom1);
+		
+		var kmllayer = new OpenLayers.Layer.Vector("KML", {
+            strategies: [new OpenLayers.Strategy.Fixed()],
+            protocol: new OpenLayers.Protocol.HTTP({
+                url: "./kml/Bombay.kml",
+                format: new OpenLayers.Format.KML({
+                    extractStyles: true, 
+                    extractAttributes: true,
+                    maxDepth: 2
+                })
+            })
+        });
+        
+		map.addLayer(kmllayer); 
+
+		var index = 2;
+	
+</script>
+
+<div align="center" id="photoShow" style="margin:0; padding:0; background:#3E3D35; float:left; height:450px; width:700px; position:absolute;top:135px;left:900px;">
+    <button id="back" style="width:58px; height:89px; background:url(icon/1.png); float:right; position:absolute; top:43%; margin-top:1px; left:1%; margin-left:1px; border:none" onclick="back();"></button>
+    <button id="forward" style="width:58px; height:89px; background:url(icon/2.png); float:right; position:absolute; top:43%; margin-top:1px; right:1%; margin-right:1px; border:none" onclick="forward();"></button>
+    <!--Change the src of each scenic spot. -->
+	<img id="photo1" src="./Photo/Mumbai Victoria Railway Station.jpg" style="width:700px;">
+	<img id="photo2" src="./Photo/Elephanta Caves.jpg" style="width:700px; display: none;">
+</div>
+
+
+<!-- Change the table height and to adjust the text window. -->
+<table id ="content1" width="700px" height="210px" align="center" cellpadding="0" cellspacing="0" style="background:#3E3D35; position:absolute; top:585px; left:900px;" >
+  <tbody>
+  <tr height="10px"></tr>
+  <tr>
+	<td width="10px"></td>
+	<!-- change the name of the name of each scenic spot. -->
+	<!-- p.s. "</br>" means starting from the next line. -->
+  	<td valign="top" width="170px" style="size:3px;color:#FFFFFF;font-family:Arial;">Mumbai Victoria Railway Station</td>
+	<!-- change the introduction. -->
+	<td valign="top" style="size:2px;color:#FFFFFF;font-family:Arial;">Mumbai Victoria Railway Station is a historic terminal train station and UNESCO World Heritage Site in Mumbai, Maharashtra, India.
+		Built in 1888, the terminus was designed in the style of Victorian Gothic architecture, showing the integration of the Victorian Italian Gothic Renaissance architectural style and the traditional Indian architectural style. This station is an example of the advanced structure and technological miracle of railway construction in the 19th century.
+		The train station was one of the most important targets of the series of terrorist attacks in Mumbai in 2008, which resulted in a large number of casualties.
+		</td>
+    <td width="10px"></td>
+  </tr>
+</table>
+
+
+
+<!-- Change the table height and to adjust the text window. -->
+<table id ="content2" width="700px" height="200px" align="center" cellpadding="0" cellspacing="0" style="background:#3E3D35; position:absolute; top:585px; left:900px; display: none;" >
+  <tbody>
+  <tr height="10px"></tr>
+  <tr>
+	<td width="10px"></td>
+	<!-- change the name of the name of each scenic spot. -->
+	<!-- p.s. "</br>" means starting from the next line. -->
+  	<td valign="top" width="170px" style="size:3px;color:#FFFFFF;font-family:Arial;">Elephanta Caves</td>
+	<!-- change the introduction. -->
+	<td valign="top" style="size:2px;color:#FFFFFF;font-family:Arial;">PElephanta Caves are a UNESCO World Heritage Site and a collection of cave temples predominantly dedicated to the Hindu god Shiva.
+		The Elephanta Caves contain rock cut stone sculptures that show syncretism of Hindu and Buddhist ideas and iconography. The caves are hewn from solid basalt rock. Except for a few exceptions, much of the artwork is defaced and damaged.
+		The origins and date when the caves were constructed have attracted considerable speculations and scholarly attention since the 19th century. Most scholars consider it to have been completed by about 550 CE.</td>
+    <td width="10px"></td>
+  </tr>
+</table>
+
+
+</div>
+
+</body>
+</html>

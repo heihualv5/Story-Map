@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<kml xmlns="http://www.opengis.net/kml/2.2">   
+  <Document> 
+  <name>San Francisco.kml</name>
+<Style id="icon">
+        <IconStyle>
+          <Icon>
+            <href>./icon/location.png</href>
+          </Icon>
+        </IconStyle>
+ </Style>
+   <Placemark>
+         <name>South Park</name>
+         <description>Where we are</description>
+         <styleUrl>#icon</styleUrl>
+         <Point>
+           <coordinates>
+            -122.394096,37.7817,0
+           </coordinates>
+         </Point>
+       </Placemark>
+
+   	<Placemark>
+         <name>South Park</name>
+         <description>Where we are</description>
+         <styleUrl>#icon</styleUrl>
+         <Point>
+           <coordinates>
+            -122.419244,37.779197,0
+           </coordinates>
+         </Point>
+       </Placemark>
+ 
+  </Document> 
+</kml>

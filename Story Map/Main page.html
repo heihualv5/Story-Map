@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en" style="position: relative">
+<head>
+    <meta charset="UTF-8">
+    <title>Overview</title>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.2.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.2.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        html body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%;height: 100%;}
+    </style>
+</head>
+<body style="position: relative; width: 100%; height: 100%;background: #F6EFE7">
+<div width="7%" style="text-align:right"><a id="TurnToFirstpage" href="First%20page.html" style="size:2px;color:#C5D5D5;font-family:Calibri;">  Back  </a></div>
+<div style="position: relative; width: 100%; height: 100%;">
+    <div id='map' style='position:fixed;left: 4%;top: 7%; width: 61.8%; height: 80%;'></div>
+    <div id="cityimg" style='position:fixed;left: 67.8%;top: 7%; width: 30%; height: 40%;background: #F6EFE7;'>
+        <img id="Cimg" src="./Shape/p0.png" style="width: 100%;height: 100%"></div>
+    </div>
+    <div id="cityname" style='position: fixed; left: 67.8%; top: 47%; width: 30%; height: 4%; background: #F6EFE7; text-align: center; text-shadow: 0.05em 0.05em 0.1em #262f30; font-family: lucida calligraphy;'></div>
+    <div id="cityinfo" style='position: fixed; left: 67.8%; top: 51%; width: 30%; height: 36%; background: #F6EFE7; color:#262f30; font-family:lucida calligraphy;'></div>   
+</div>
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiaGVpaHVhbHY1IiwiYSI6ImNrMGF5ZzNmYzBpYXIzbm94ZTdxNDhrbHkifQ.lrhlym4qYeAimImVT1e6GA';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        minZoom: '1',
+        maxZoom: '1',
+        center: [140, 23],
+        style: 'mapbox://styles/heihualv5/ck0cqm15204371cnwnqsghput',
+    });
+    var LngList=new Array(8);
+    LngList[0]=-0.13;
+    LngList[1]=32.34;
+    LngList[2]=72.83;
+    LngList[3]=88.35;
+    LngList[4]=114.16;
+    LngList[5]=139.63;
+    LngList[6]=-122.40;
+    LngList[7]=-74.00;
+    var LatList=new Array(8);
+    LatList[0]=51.51;
+    LatList[1]=30.62;
+    LatList[2]=18.98;
+    LatList[3]=22.54;
+    LatList[4]=22.28;
+    LatList[5]=35.43;
+    LatList[6]=37.78;
+    LatList[7]=40.73;
+    var htmlVec=new Array(8);
+    htmlVec[0]="City Page/London.html";
+    htmlVec[1]="City Page/Suez.html";
+    htmlVec[2]="City Page/Bombay.html";
+    htmlVec[3]="City Page/Calcutta.html";
+    htmlVec[4]="City Page/Hong Kong.html";
+    htmlVec[5]="City Page/Yokohama.html";
+    htmlVec[6]="City Page/San Francisco.html";
+    htmlVec[7]="City Page/NewYork.html";
+    var CityName=new Array(8);
+    CityName[0]="London, UK";
+    CityName[1]="Suez, Egypt";
+    CityName[2]="Bombay, India";
+    CityName[3]="Calcutta, India";
+    CityName[4]="Hong Kong, China";
+    CityName[5]="Yokohama, Japan";
+    CityName[6]="San Francisco, USA";
+    CityName[7]="New York, USA";
+    var CityInfo=new Array(8);
+    CityInfo[0]="<br>\"You do not forget when you are due in London again?\" asked Stuart.<br><br>\"In eighty days; on Saturday, the 21st of December, 1872, at a quarter before nine p.m. Good-bye, gentlemen.\" <br><br>Phileas Fogg and his servant seated themselves in a first-class carriage at twenty minutes before nine; five minutes later the whistle screamed, and the train slowly glided out of the station. <br><br>The night was dark, and a fine, steady rain was falling. Phileas Fogg, snugly ensconced in his corner, did not open his lips. Passepartout, not yet recovered from his stupefaction, clung mechanically to the carpet-bag, with its enormous treasure.";
+    CityInfo[1]="\"Yes; but we travel so fast that I seem to be journeying in a dream. So this is Suez?\"<br><br>\“Yes.\"<br><br>\"In Egypt?\"<br><br>\"Certainly, in Egypt.\"<br><br>\"And in Africa?\" <br><br>\"In Africa.\" <br><br>\"In Africa!\" repeated Passepartout. \"Just think, monsieur, I had no idea that we should go farther than Paris; and all that I saw of Paris was between twenty minutes past seven and twenty minutes before nine in the morning, between the Northern and the Lyons stations, through the windows of a car, and in a driving rain! How I regret not having seen once more Père la Chaise and the circus in the Champs Elysées!\"";
+    CityInfo[2]="<br><br><br><br><br>The general route of the Great Indian Peninsula Railway is as follows: -Leaving Bombay, it passes through Salcette, crossing to the continent opposite Tannah, goes over the chain of the Western Ghauts, runs thence north-east as far as Burhampoor…";
+    CityInfo[3]="<br><br><br><br><br>…skirts the nearly independent territory of Bundelcund, ascends to Allahabad, turns thence eastwardly, meeting the Ganges at Benares, then departs from the river a little, and, descending south-eastward by Burdivan and the French town of Chandernagor, has its terminus at Calcutta.";
+    CityInfo[4]="<br><br>HONG KONG is an island which came into the possession of the English by the treaty of Nankin, after the war of 1842; and the colonizing genius of the English has created upon it an important city and an excellent port. The island is situated at the mouth of the Canton River, and is separated by about sixty miles from the Portuguese town of Macao, on the opposite coast. Hong Kong has beaten Macao in the struggle for the Chinese trade, and now the greater part of the transportation of Chinese goods finds its depôt at the former place. Docks, hospitals, wharves, a Gothic cathedral, a government house, macadamized streets give to Hong Kong the appearance of a town in Kent or Surrey transferred by some strange magic to the antipodes.";
+    CityInfo[5]="<br><br>The Japanese quarter of Yokohama is called Benten, after the goddess of the sea, who is worshipped on the islands round about. There Passepartout beheld beautiful fir and cedar groves, sacred gates of a singular architecture, bridges half hid in the midst of bamboos and reeds, temples shaded by immense cedar-trees, holy retreats where were sheltered Buddhist priests and sectaries of Confucius, and interminable streets, where a perfect harvest of rose-tinted and red-cheeked children, who looked as if they had been cut out of Japanese screens, and who were playing in the midst of short-legged poodles and yellowish cats, might have been gathered.";
+    CityInfo[6]="<br><br><br><br><br>\"FROM ocean to ocean,\"-so say the Americans; and these four words compose the general designation of the \"great trunk line \" which crosses the entire width of the United States. The Pacific Railroad is, however, really divided into two distinct lines: the Central Pacific, between San Francisco and Ogden, and the Union Pacific, between Ogden and Omaha. Five main lines connect Omaha with New York.";
+    CityInfo[7]="<br><br><br><br><br>New York and San Francisco are thus united by an uninterrupted metal ribbon, which measures no less than three thousand seven hundred and eighty-six miles. Between Omaha and the Pacific the railway crosses a territory which is still infested by Indians and wild beasts, and a large tract which the Mormons, after they were driven from Illinois in 1845, began to colonize.";
+    var CityImage=new Array(8);
+    CityImage[0]="./Shape/London.png";
+    CityImage[1]="./Shape/Suez.png";
+    CityImage[2]="./Shape/Bombay.png";
+    CityImage[3]="./Shape/Calcutta.png";
+    CityImage[4]="./Shape/HongKong.png";
+    CityImage[5]="./Shape/yokohama.png";
+    CityImage[6]="./Shape/SanFrancisco.png";
+    CityImage[7]="./Shape/NewYork.png";
+    var CityId =  null;
+    map.on('click', function (e) {
+        var LngLat=e.lngLat.toArray();
+        var reactBox=new Array(LngLat[0]-5,LngLat[0]+5,LngLat[1]-5,LngLat[1]+5);
+
+        for(i=0;i<8;i++){
+            if(LngList[i]>reactBox[0]&&LngList[i]<reactBox[1]&&LatList[i]>reactBox[2]&&LatList[i]<reactBox[3])
+            {
+                    //window.location.href="test.html";
+                    window.location.href=htmlVec[i];
+            }
+            if(LngList[i]+360>reactBox[0]&&LngList[i]+360<reactBox[1]&&LatList[i]>reactBox[2]&&LatList[i]<reactBox[3])
+            {
+               //window.location.href="test.html";
+                window.location.href=htmlVec[i];
+            }
+            if(LngList[i]-360>reactBox[0]&&LngList[i]-360<reactBox[1]&&LatList[i]>reactBox[2]&&LatList[i]<reactBox[3])
+            {
+               // window.location.href="test.html";
+               window.location.href=htmlVec[i];
+            }
+        }
+        //document.getElementById('info').innerHTML =LngLat[0].toString()+"/"+LngLat[1].toString();
+    });
+    map.on('mousemove', function (e) {
+        var inCity=false
+        var LngLat=e.lngLat.toArray();
+        var reactBox=new Array(LngLat[0]-5,LngLat[0]+5,LngLat[1]-5,LngLat[1]+5);
+        var bBox=[[e.point.x - 5, e.point.y - 5], [e.point.x + 5, e.point.y + 5]]
+        for(i=0;i<8;i++){
+            if(LngList[i]>reactBox[0]&&LngList[i]<reactBox[1]&&LatList[i]>reactBox[2]&&LatList[i]<reactBox[3])
+            {
+                var text1=LngList[i].toString()+"/"+LatList[i].toString();
+                var bbox = [[e.point.x - 5, e.point.y - 5], [e.point.x + 5, e.point.y + 5]];
+                var feature = map.queryRenderedFeatures(bbox, { layers: ["highLightP"] });
+                CityId = JSON.stringify(feature[0].id, null, 2);
+                map.setFeatureState({source: "Cp",id: CityId},{hover: true});
+                document.getElementById('cityname').innerHTML =CityName[i];
+                document.getElementById('cityinfo').innerHTML =CityInfo[i];
+                document.getElementById('Cimg').src=CityImage[i];
+                inCity=true;
+            }
+            if(LngList[i]+360>reactBox[0]&&LngList[i]+360<reactBox[1]&&LatList[i]>reactBox[2]&&LatList[i]<reactBox[3])
+            {
+                var text1=LngList[i].toString()+"/"+LatList[i].toString();
+                var bbox = [[e.point.x - 5, e.point.y - 5], [e.point.x + 5, e.point.y + 5]];
+                var feature = map.queryRenderedFeatures(bbox, { layers: ["highLightP"] });
+                CityId = JSON.stringify(feature[0].id, null, 2);
+                map.setFeatureState({source: "Cp",id: CityId},{hover: true});
+                document.getElementById('cityname').innerHTML =CityName[i];
+                document.getElementById('cityinfo').innerHTML =CityInfo[i];
+                document.getElementById('Cimg').src=CityImage[i];
+                inCity=true;
+
+            }
+            if(LngList[i]-360>reactBox[0]&&LngList[i]-360<reactBox[1]&&LatList[i]>reactBox[2]&&LatList[i]<reactBox[3])
+            {
+                var text1=LngList[i].toString()+"/"+LatList[i].toString();
+                var bbox = [[e.point.x - 5, e.point.y - 5], [e.point.x + 5, e.point.y + 5]];
+                var feature = map.queryRenderedFeatures(bbox, { layers: ["highLightP"] });
+                CityId = JSON.stringify(feature[0].id, null, 2);
+                map.setFeatureState({source: "Cp",id: CityId},{hover: true});
+                document.getElementById('cityname').innerHTML =CityName[i];
+                document.getElementById('cityinfo').innerHTML =CityInfo[i];
+                document.getElementById('Cimg').src=CityImage[i];
+                inCity=true;
+
+            }
+            if (inCity==false)
+            {
+                map.setFeatureState({source: "Cp",id: CityId},{hover: false});
+                document.getElementById('cityname').innerHTML ="";
+                document.getElementById('cityinfo').innerHTML ="";
+                document.getElementById('Cimg').src="./Shape/p0.png";
+                CityId=null;
+            }
+
+        }
+    });
+    map.on('load', function() {
+        map.addSource("Cp",{
+            "type": "geojson",
+            "data": {
+                "type": "FeatureCollection",
+                "features": [{
+                    "type": "Feature",
+                    "properties":{"id": "London",},
+                    "geometry": {
+                        "type": "Point",
+                        "id":"sss",
+                        "coordinates": [-0.13,51.51],
+                    }
+                },
+                    {
+                        "type": "Feature",
+                        "properties":{"id": "Suez",},
+                        "geometry": {
+                            "type": "Point",
+                            "coordinates": [32.34,30.62],
+                        }
+
+                    },
+                    {
+                        "type": "Feature",
+                        "properties":{"id": "Mumbai",},
+                        "geometry": {
+                            "type": "Point",
+                            "coordinates": [72.83,18.98],
+                        }
+                    },
+                    {
+                        "type": "Feature",
+                        "properties":{"id": "Kolkata",},
+                        "geometry": {
+                            "type": "Point",
+                            "coordinates": [88.35,22.54],
+                        }
+                    },
+                    {
+                        "type": "Feature",
+                        "properties":{"id": "HongKong",},
+                        "geometry": {
+                            "type": "Point",
+                            "coordinates": [114.16,22.28],
+                        }
+                    },
+                    {
+                        "type": "Feature",
+                        "properties":{"id": "Yokohama",},
+                        "geometry": {
+                            "type": "Point",
+                            "coordinates": [139.63,35.43],
+                        }
+                    },
+                    {
+                        "type": "Feature",
+                        "properties":{"id": "SanFrancisco",},
+                        "geometry": {
+                            "type": "Point",
+                            "coordinates": [-122.40,37.78],
+                        }
+                    },
+                    {
+                        "type": "Feature",
+                        "properties":{"id": "NewYork",},
+                        "geometry": {
+                            "type": "Point",
+                            "coordinates": [-74.00,40.73],
+                        }
+                    }
+                ]
+            },
+            'generateId':true
+        })
+        map.loadImage('city.png', function(error, image) {
+            if (error) throw error;
+            map.addImage('City', image);
+            map.addLayer({
+                "id": "CityP",
+                "type": "symbol",
+                "source": "Cp",
+                "layout": {
+                    "icon-allow-overlap":true,
+                    "icon-image": "City",
+                    "icon-size": 0.1
+                },
+                "paint":{
+                    "icon-opacity": 1
+                }
+            });
+        });
+        map.loadImage('highlight.png', function(error, image) {
+            if (error) throw error;
+            map.addImage('highlight', image);
+            map.addLayer({
+                "id": "highLightP",
+                "type": "symbol",
+                "source": "Cp",
+                "layout": {
+                    "icon-allow-overlap":true,
+                    "icon-image": "highlight",
+                    "icon-size": 0.1
+                },
+                "paint":{
+                    "icon-opacity": ["case",
+                        ["boolean", ["feature-state", "hover"], false],
+                        1,
+                        0.0001
+                    ],
+                }
+            });
+        });
+        map.addLayer({
+            'id': 'lines',
+            'type': 'line',
+            'source': {
+                'type': 'geojson',
+                'data': {
+                    'type': 'FeatureCollection',
+                    'features': [{
+                        'type': 'Feature',
+                        'properties': {
+                            'color': '#F7455D' // red
+                        },
+                        'geometry': {
+                            'type': 'LineString',
+                            'coordinates': [
+                                [-0.13,51.51],
+                                [32.34,30.62],
+                                [72.83,18.98],
+                                [88.35,22.54],
+                                [114.16,22.28],
+                                [139.63,35.43],
+                                [237.6,37.78],
+                                [286.00,40.73],
+                                [360.13,51.51],
+                            ]
+                        }
+                    }, {
+                        'type': 'Feature',
+                        'properties': {
+                            'color': '#33C9EB' // blue
+                        },
+                    }]
+                }
+            },
+            'paint': {
+                'line-width': 3,
+                'line-color': ['get', 'color'],
+                "line-dasharray": [0.5, 1.8],
+            }
+        });
+    });
+</script>
+</body>
+</html>
